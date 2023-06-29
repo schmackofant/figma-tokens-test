@@ -7,6 +7,10 @@
   "license": "MIT",
   "dependencies": {
     "@tokens-studio/sd-transforms": "^0.9.10",
-    "style-dictionary": "^3.8.0"
+    "style-dictionary": "^3.8.0",
+    "token-transformer": "^0.0.33"
+  },
+  "scripts": {
+    "build-tokens": "token-transformer tokens.json output.json global,light --resolveReferences=false && node build.js"
   }
 }
