@@ -6,16 +6,16 @@ registerTransforms(StyleDictionary);
 const sd = StyleDictionary.extend({
   source: ["./tokens.json"],
   platforms: {
-    js: {
-      transformGroup: "tokens-studio",
-      buildPath: "build/js/",
-      files: [
-        {
-          destination: "variables.js",
-          format: "javascript/es6",
-        },
-      ],
-    },
+    // js: {
+    //   transformGroup: "tokens-studio",
+    //   buildPath: "build/js/",
+    //   files: [
+    //     {
+    //       destination: "variables.js",
+    //       format: "javascript/es6",
+    //     },
+    //   ],
+    // },
     css: {
       transforms: [
         "ts/descriptionToComment",
