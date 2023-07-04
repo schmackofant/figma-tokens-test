@@ -1,4 +1,3 @@
-import "@/styles/variables.css"
 import "@/styles/globals.css"
 
 import { fontSans } from "@/lib/fonts"

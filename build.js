@@ -1,6 +1,5 @@
 const { registerTransforms } = require("@tokens-studio/sd-transforms")
 const StyleDictionary = require("style-dictionary")
-const glob = require("glob")
 const fs = require("fs")
 
 const formatValue = (tokenType, value) => {
@@ -13,8 +12,10 @@ const formatValue = (tokenType, value) => {
   return formattedValue
 }
 
+const variablesFile = "./styles/variables.css"
+
 function transformHSLValues(precision) {
-  const css = fs.readFileSync("./styles/variables.css", "utf8")
+  const css = fs.readFileSync(variablesFile, "utf8")
 
   const transformedCss = css.replace(
     /hsl\(([\d.]+)[,\s]+([\d.]+)%[,\s]+([\d.]+)%\)/g,
@@ -22,12 +23,12 @@ function transformHSLValues(precision) {
       hue = `${roundNumber(hue, precision)}deg`
       saturation = `${roundNumber(saturation, precision)}%`
       lightness = `${roundNumber(lightness, precision)}%`
-      console.log(`COLOR DEBUG TW: ${hue} ${saturation} ${lightness}`)
+      // console.log(`COLOR DEBUG TW: ${hue} ${saturation} ${lightness}`)
       return `${hue} ${saturation} ${lightness}`
     }
   )
 
-  fs.writeFileSync("./styles/variables.css", transformedCss)
+  fs.writeFileSync(variablesFile, transformedCss)
 
   function roundNumber(number, precision) {
     const rounded = parseFloat(number).toFixed(precision)
@@ -53,7 +54,7 @@ StyleDictionary.registerFormat({
       `{\n${dictionary.allProperties
         .map((token) => {
           const value = formatValue(token.type, token.value)
-          console.log(`COLOR DEBUG: ${token.name} : ${value}`)
+          // console.log(`COLOR DEBUG: ${token.name} : ${value}`)
           return `  "${token.path.slice(1).join("-")}": "var(--${
             token.name
           }, ${value});"`
@@ -107,11 +108,3 @@ sd.cleanAllPlatforms()
 sd.buildAllPlatforms()
 
 transformHSLValues(1)
-
-fs.readFile("./styles/variables.css", "utf8", (err, data) => {
-  if (err) {
-    console.error(err)
-    return
-  }
-  console.log(data)
-})
