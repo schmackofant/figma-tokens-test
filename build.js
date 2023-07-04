@@ -110,4 +110,12 @@ const sd = StyleDictionary.extend({
 sd.cleanAllPlatforms()
 sd.buildAllPlatforms()
 
+fs.readFile("./styles/variables.css", "utf8", (err, data) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+  console.log(data)
+})
+
 transformHSLValues(1)
