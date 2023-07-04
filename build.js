@@ -1,17 +1,17 @@
-const { registerTransforms } = require("@tokens-studio/sd-transforms");
-const StyleDictionary = require("style-dictionary");
+const { registerTransforms } = require("@tokens-studio/sd-transforms")
+const StyleDictionary = require("style-dictionary")
 
 const formatValue = (tokenType, value) => {
-  let formattedValue;
+  let formattedValue
   switch (tokenType) {
     case "color":
     default:
-      formattedValue = value;
+      formattedValue = value
   }
-  return formattedValue;
-};
+  return formattedValue
+}
 
-registerTransforms(StyleDictionary);
+registerTransforms(StyleDictionary)
 
 /**
  * Custom format that generate tailwind color config based on css variables
@@ -23,18 +23,18 @@ StyleDictionary.registerFormat({
       "module.exports = " +
       `{\n${dictionary.allProperties
         .map((token) => {
-          const value = formatValue(token.type, token.value);
+          const value = formatValue(token.type, token.value)
           return `  "${token.path.slice(1).join("-")}": "var(--${
             token.name
-          }, ${value});"`;
+          }, ${value});"`
         })
         .join(",\n")}\n}`
-    );
+    )
   },
-});
+})
 
 const sd = StyleDictionary.extend({
-  source: ["./output.json"],
+  source: ["./tokens-output.json"],
   platforms: {
     js: {
       transformGroup: "tokens-studio",
@@ -62,7 +62,7 @@ const sd = StyleDictionary.extend({
         "ts/color/modifiers",
         "name/cti/kebab",
       ],
-      buildPath: "build/css/",
+      buildPath: "styles/",
       files: [
         {
           destination: "variables.css",
@@ -71,7 +71,7 @@ const sd = StyleDictionary.extend({
       ],
     },
   },
-});
+})
 
-sd.cleanAllPlatforms();
-sd.buildAllPlatforms();
+sd.cleanAllPlatforms()
+sd.buildAllPlatforms()
