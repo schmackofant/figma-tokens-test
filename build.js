@@ -13,28 +13,21 @@ const formatValue = (tokenType, value) => {
   return formattedValue
 }
 
-const cssFiles = glob.sync("./styles/variables.css")
-
 function transformHSLValues(precision) {
-  console.log("start transformHSLValues")
+  const css = fs.readFileSync("./styles/variables.css", "utf8")
 
-  cssFiles.forEach((file) => {
-    console.log("reading file")
-    const css = fs.readFileSync(file, "utf8")
+  const transformedCss = css.replace(
+    /hsl\(([\d.]+)[,\s]+([\d.]+)%[,\s]+([\d.]+)%\)/g,
+    (match, hue, saturation, lightness) => {
+      hue = `${roundNumber(hue, precision)}deg`
+      saturation = `${roundNumber(saturation, precision)}%`
+      lightness = `${roundNumber(lightness, precision)}%`
+      console.log(`COLOR DEBUG TW: ${hue} ${saturation} ${lightness}`)
+      return `${hue} ${saturation} ${lightness}`
+    }
+  )
 
-    const transformedCss = css.replace(
-      /hsl\(([\d.]+)[,\s]+([\d.]+)%[,\s]+([\d.]+)%\)/g,
-      (match, hue, saturation, lightness) => {
-        hue = `${roundNumber(hue, precision)}deg`
-        saturation = `${roundNumber(saturation, precision)}%`
-        lightness = `${roundNumber(lightness, precision)}%`
-        console.log(`COLOR DEBUG TW: ${hue} ${saturation} ${lightness}`)
-        return `${hue} ${saturation} ${lightness}`
-      }
-    )
-
-    fs.writeFileSync(file, transformedCss)
-  })
+  fs.writeFileSync("./styles/variables.css", transformedCss)
 
   function roundNumber(number, precision) {
     const rounded = parseFloat(number).toFixed(precision)
