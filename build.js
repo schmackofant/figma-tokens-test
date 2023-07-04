@@ -13,7 +13,7 @@ const formatValue = (tokenType, value) => {
   return formattedValue
 }
 
-const cssFiles = glob.sync("styles/variables.css")
+const cssFiles = glob.sync("./styles/variables.css")
 
 function transformHSLValues(precision) {
   cssFiles.forEach((file) => {
@@ -110,5 +110,4 @@ const sd = StyleDictionary.extend({
 sd.cleanAllPlatforms()
 sd.buildAllPlatforms()
 
-// Example usage:
 transformHSLValues(1)
