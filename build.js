@@ -56,6 +56,7 @@ StyleDictionary.registerFormat({
       `{\n${dictionary.allProperties
         .map((token) => {
           const value = formatValue(token.type, token.value)
+          console.log(`COLOR DEBUG: ${token.name} : ${value}`)
           return `  "${token.path.slice(1).join("-")}": "var(--${
             token.name
           }, ${value});"`
