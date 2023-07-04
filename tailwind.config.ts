@@ -49,7 +49,7 @@ module.exports = {
       },
       borderRadius: {
         lg: `var(--radius)`,
-        md: `calc(var(--radius) - 2px)`,
+        md: `var(--border-radius-medium)`,
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
