@@ -25,6 +25,7 @@ function transformHSLValues(precision) {
         hue = `${roundNumber(hue, precision)}deg`
         saturation = `${roundNumber(saturation, precision)}%`
         lightness = `${roundNumber(lightness, precision)}%`
+        console.log(`COLOR DEBUG TW: ${hue} ${saturation} ${lightness}`)
         return `${hue} ${saturation} ${lightness}`
       }
     )
