@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build-tokens": "token-transformer tokens.json tokens-output.json global,light --resolveReferences=false && node build.js",
-    "build": "next build",
+    "build": "yarn build-tokens && next build",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start"
