@@ -16,7 +16,10 @@ const formatValue = (tokenType, value) => {
 const cssFiles = glob.sync("./styles/variables.css")
 
 function transformHSLValues(precision) {
+  console.log("start transformHSLValues")
+
   cssFiles.forEach((file) => {
+    console.log("reading file")
     const css = fs.readFileSync(file, "utf8")
 
     const transformedCss = css.replace(
@@ -110,6 +113,8 @@ const sd = StyleDictionary.extend({
 sd.cleanAllPlatforms()
 sd.buildAllPlatforms()
 
+transformHSLValues(1)
+
 fs.readFile("./styles/variables.css", "utf8", (err, data) => {
   if (err) {
     console.error(err)
@@ -117,5 +122,3 @@ fs.readFile("./styles/variables.css", "utf8", (err, data) => {
   }
   console.log(data)
 })
-
-transformHSLValues(1)
