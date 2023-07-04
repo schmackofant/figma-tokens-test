@@ -1,4 +1,7 @@
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
 
 export default function IndexPage() {
   return (
@@ -8,6 +11,14 @@ export default function IndexPage() {
           Figma Design Tokens Test
         </h1>
         <Button size="lg">Mint IP-NFT</Button>
+        <div className="mt-6 flex items-center space-x-2">
+          <Switch id="airplane-mode" />
+          <Label htmlFor="airplane-mode">Airplane Mode</Label>
+        </div>
+        <div className="mt-6 grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="email">Email</Label>
+          <Input type="email" id="email" placeholder="Email" />
+        </div>
       </div>
     </div>
   )
