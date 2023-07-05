@@ -12,7 +12,7 @@
     "lint": "next lint",
     "start": "next start",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "yarn build-tokens && storybook build"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.3",
